@@ -17,6 +17,21 @@ The agent operates on a strict three-step cognitive cycle:
     * ✅ **Verified Facts:** If the entity is real, the fact is permanently saved to this memory. Future queries can retrieve this "verified truth."
     * ❌ **Fictional/Unverified:** If the entity is fictional, the agent refuses to save it, preventing the "pollution" of the database with false information.
 
+### 🔄 Workflow Diagram
+
+```mermaid
+graph TD
+    A[User Input] --> B[🔍 Search Internal Book]
+    B --> C{Found in Book?}
+    C -- No --> D[End: Fact Not Found]
+    C -- Yes --> E[Extract Entity]
+    E --> F[🌍 Verify with Wikipedia]
+    F --> G{Is Real?}
+    G -- No --> H[❌ Reject: Fictional/Lore]
+    G -- Yes --> I[✅ Save to Memory]
+    I --> J[End: Verified & Stored]
+    H --> K[End: Answer without Storing]
+```
 ## 🛠️ Tech Stack
 
 * **Orchestration:** LangChain (ReAct Agent Pattern)
